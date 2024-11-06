@@ -1,16 +1,7 @@
-# Delete Book
-### Delete the book and confirm the deletion by trying to retrieve all books again.
- 
-python manage.py shell
-
+# Python Command
 from bookshelf.models import Book
-
-book = Book.objects.get(title='Nineteen Eighty-Four')
-
+book = Book.objects.get(id=1)
 book.delete()
-
-""" (1, {'bookshelf.Book': 1}) """
-
-Book.objects.all()
-
-""" <QuerySet []> """
+books = Book.objects.all()
+print(books)
+# Expected output: <QuerySet []>

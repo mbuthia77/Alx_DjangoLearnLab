@@ -1,40 +1,27 @@
-# CRUD Operations in Bookshelf App
+### Create
 
-### Create a Book instance with the title “1984”, author “George Orwell”, and publication year 1949.
-
+```python
 from bookshelf.models import Book
+book = Book.objects.create(title="1984", author="George Orwell", publication_year=1949)
+print(book)
+# Expected output: <Book: 1984>
 
-new_book = Book(title="1984", author="George Orwell", publication_year=1949)
+### Retrieve
 
-new_book.save()
+book = Book.objects.get(id=1)
+print(book)
+# Expected output: <Book: 1984>
 
-"""There was no output for each of the commands which imply that the commands were successful"""
+### Update
+book = Book.objects.get(id=1)
+book.title = "Nineteen Eighty-Four"
+book.save()
+print(book)
+# Expected output: <Book: Nineteen Eighty-Four>
 
-
-### Retrieve and display all attributes of the book created above.
-
-Book.objects.filter(title="1984", author="George Orwell")
-
-"""<QuerySet [<Book:  Title: 1984, Author: George Orwell, Publication Date: 1949>]>"""
-
-
-### Update the book title to "Nineteen Eighty-Four and save the changes"
-
-new_book.title = 'Nineteen Eighty-Four'
-
-new_book.save()
-
-Book.objects.all()
-
-"""<QuerySet [<Book:  Title: Nineteen Eighty-Four, Author: George Orwell, Publication Date: 1949>]>"""
-
-
-### Delete the book and confirm the deletion by trying to retrieve all books again.
-
-Book.objects.filter(title="Nineteen Eighty-Four").delete()
- 
-"""(1, {'bookshelf.Book': 1})"""
-
-Book.objects.all()
-
-"""<QuerySet []>"""
+###Delete
+book = Book.objects.get(id=1)
+book.delete()
+books = Book.objects.all()
+print(books)
+# Expected output: <QuerySet []>
