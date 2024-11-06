@@ -1,19 +1,19 @@
 from django.urls import path
 from . import views
-from .views import list_books, UserLoginView, UserLogoutView
+from .views import list_books
+from .views import admin_view, librarian_view, member_view
+from .views import add_book, edit_book, delete_book
 
 urlpatterns = [
-    path('list_books/', list_books, name='list_books'),
-    # path('list_view/<int:book_id>/', views.book_detail, name='book_detail'),  # Add URL for book detail page.
-    path('library/<int:pk>/', views.LibraryDetailView.as_view(), name='library_detail'),  # Add URL for library detail page.
-    path('login/', UserLoginView.as_view, template_name='login'),
-    path('logout/', UserLogoutView.as_view, template_name='logout'),
-    path('register/', views.register, name='register'),  # Add URL for user registration.
-    path('register/', views.UserRegisterView.as_view(), template_name='register'),  # Add URL for user registration.
-    path('admin_view/', views.admin_view, name='admin_view'),
-    path('librarian_view/', views.librarian_view, name='librarian_view'),
-    path('member_view/', views.member_view, name='member_view'),  # Add URL for member view.
-    path('add_book/', views.add_book, name='add_book'),
-    path('edit_book/<int:pk>/', views.edit_book, name='edit_book'),
-    path('delete_book/<int:pk>/', views.delete_book, name='delete_book'),  # Add URL for book deletion.  # Add URL for book deletion.  # Add URL for book deletion.  # Add URL for book deletion.  #
+    path('books/', list_books, name='list_books'),
+    path('library/<int:pk>/', views.LibraryDetailView.as_view(), name='library_detail'),
+    path('login/', LoginView.as_view(template_name='relationship_app/login.html'), name='login'),
+    path('logout/', LogoutView.as_view(template_name='relationship_app/logout.html'), name='logout'),
+    path('register/', views.register, name='register'),
+    path('admin-view/', admin_view, name='admin_view'),
+    path('librarian-view/', librarian_view, name='librarian_view'),
+    path('member-view/', member_view, name='member_view'),
+    path('book/add_book/', add_book, name='add_book'),
+    path('book/<int:pk>/edit_book/', edit_book, name='edit_book'),
+    path('book/<int:pk>/delete/', delete_book, name='delete_book'),
 ]
